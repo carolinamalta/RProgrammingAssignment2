@@ -4,13 +4,14 @@
 ## Here I defined the type of matrix to use, along with values set to NULL
 
 makeCacheMatrix <- function(x = matrix(C(1,2,3,4),nrow=2, ncol=2)) { ## assume that my matrix is a square matrix
-         d <- NULL
+         d <- NULL              ## value originally set as NULL
          set<- function(y) {
                  x <<- y        
-                 d <<- NULL
+                 d <<- NULL     ##value in cache set to NULL
          }
          get <- function() x
-         setinverse <- function(solve) d <<- inverse
+         setinverse <- function(solve) d <<- inverse  ## to set the inverse variable we create a solve function 
+         ##and assign inverse value in the cache that revolves around the get function
          getinverse <- function() d
          list(set = set, get = get,
               setinverse = setinverse,
@@ -18,7 +19,9 @@ makeCacheMatrix <- function(x = matrix(C(1,2,3,4),nrow=2, ncol=2)) { ## assume t
 }
 
 
-## Write a short comment describing this function
+## the cacheSolve function attempts to check for the value of d, whether it is null or not; the if function evaluates
+## the condition of not being NULL and the matrix's determinant not being = 0 since that theoretically would make the
+## matrix not inversible; the opposite outcome is set in the function above as default value
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
